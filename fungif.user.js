@@ -157,6 +157,7 @@
                         sendPicture(result.imgurUrl);
                     }
                     else {
+                        $modal.hide();
                         $.ajax({
                             url: 'https://api.imgur.com/3/image',
                             type: 'POST',
