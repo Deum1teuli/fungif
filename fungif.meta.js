@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         fungif
 // @namespace    http://sc2tv.ru
-// @version      0.2
+// @version      0.3
 // @description  sc2tv & funstream chat gifs paste
 // @author       Domitori
 // @include      http://sc2tv.ru/*
@@ -14,5 +14,6 @@
 // @grant        GM_setValue
 // @grant        GM_listValues
 // @grant        GM_deleteValue
+// @grant        GM_addStyle
 // @run-at       document-end
 // ==/UserScript==

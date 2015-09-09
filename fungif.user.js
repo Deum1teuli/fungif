@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         fungif
 // @namespace    http://sc2tv.ru
-// @version      0.2
+// @version      0.3
 // @description  sc2tv & funstream chat gifs paste
 // @author       Domitori
 // @include      http://sc2tv.ru/*
@@ -14,6 +14,7 @@
 // @grant        GM_setValue
 // @grant        GM_listValues
 // @grant        GM_deleteValue
+// @grant        GM_addStyle
 // @run-at       document-end
 // ==/UserScript==
 
@@ -42,7 +43,8 @@
 
         var $chatInput, chatModule;
 
-        var $button = $('<i style="position:absolute;width:17px;height:17px;top:5px;right:25px;z-index:10;cursor:pointer;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABklBMVEX///83axlTdKo3axlbe6pRdKhPcqtIbahYd6tYeatKcKo5ZKY6ZKY6ZKg6Zqg8ZqhDa6hDa6pFbapFbatGbag3axk3axlHc2w9a13c3t43axk/cCJCYoFMezFTjChVfaRWf6ZXjy1YgqxcgZZdh0dgiUllgI9mjk9ulV9ulpxunptyoaFyp9xzqN1zqd1zqt51reV2nqZ6oKt6orp7mqV8o7p9oaR+pLqApruBpLaBq2GCuuSDpbaDqLyDuuSEpbSHuWCHumCIq76IvciLumKMvGWNumSPu2qPvGeWxN+YxeKZwdOdx+ar2fKr2vOs2vOt3PGt3PKu2u+v3fKv3fSv3vav3/ew3fWw3vWw3vax05Cx1pKx4Piy0pWy4fq01JW04/y15P215f621JzQ5rrX6P3X6P7m7fbm7vTn7/bo7vHo7/fq7O7q8ffr8Pfr8vfr8vjs8Pbs8Pfs8fft8vft8vju8vfu8/fu8/jv8vfv8/fv8/jv9Pfv9Pjw8vfw8/jx8vPx9Pfy8/Py9Pfz9Pf///9cyHRiAAAAGnRSTlMAiIqMjY/D4ejp7/Dw8PDw8PDw8PDy9/f4/kBWqswAAADISURBVBgZBcFLSgNBEIDhv2qqkwxGGSH42Ing4xguBPEk4q3MKVwIniO4EEJwEVAXyqh0dXf5fQAAAAAIZvMMEEA3upGGe43m4tXDH9zYuVvupSKqkrY3/Y/hdnA0dZWJampgUPv96AGgBQaeR/XSpKUaYOAfQ4v817E7BhjU3w0RAZ/fgBGhggBeZ88JAweAPJylzUtnVMtfAHpSztcXoyFxKwCP/SlXKzPcj6VE1LZ+vX6aFUFtHgDTyeXhdvUmAAAgi+Tv8Q/rE1ZhxNifkQAAAABJRU5ErkJggg==) no-repeat;"></i>');
+        GM_addStyle('@keyframes animatedBackground{from{background-position:0 0;}to{background-position:17px 0;}}.animate-icon{background-repeat:repeat-x!important;animation:animatedBackground 1s linear infinite;}');
+        var $button = $('<i style="position:absolute;width:17px;height:17px;top:3px;right:21px;z-index:10;cursor:pointer;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABklBMVEX///83axlTdKo3axlbe6pRdKhPcqtIbahYd6tYeatKcKo5ZKY6ZKY6ZKg6Zqg8ZqhDa6hDa6pFbapFbatGbag3axk3axlHc2w9a13c3t43axk/cCJCYoFMezFTjChVfaRWf6ZXjy1YgqxcgZZdh0dgiUllgI9mjk9ulV9ulpxunptyoaFyp9xzqN1zqd1zqt51reV2nqZ6oKt6orp7mqV8o7p9oaR+pLqApruBpLaBq2GCuuSDpbaDqLyDuuSEpbSHuWCHumCIq76IvciLumKMvGWNumSPu2qPvGeWxN+YxeKZwdOdx+ar2fKr2vOs2vOt3PGt3PKu2u+v3fKv3fSv3vav3/ew3fWw3vWw3vax05Cx1pKx4Piy0pWy4fq01JW04/y15P215f621JzQ5rrX6P3X6P7m7fbm7vTn7/bo7vHo7/fq7O7q8ffr8Pfr8vfr8vjs8Pbs8Pfs8fft8vft8vju8vfu8/fu8/jv8vfv8/fv8/jv9Pfv9Pjw8vfw8/jx8vPx9Pfy8/Py9Pfz9Pf///9cyHRiAAAAGnRSTlMAiIqMjY/D4ejp7/Dw8PDw8PDw8PDy9/f4/kBWqswAAADISURBVBgZBcFLSgNBEIDhv2qqkwxGGSH42Ing4xguBPEk4q3MKVwIniO4EEJwEVAXyqh0dXf5fQAAAAAIZvMMEEA3upGGe43m4tXDH9zYuVvupSKqkrY3/Y/hdnA0dZWJampgUPv96AGgBQaeR/XSpKUaYOAfQ4v817E7BhjU3w0RAZ/fgBGhggBeZ88JAweAPJylzUtnVMtfAHpSztcXoyFxKwCP/SlXKzPcj6VE1LZ+vX6aFUFtHgDTyeXhdvUmAAAgi+Tv8Q/rE1ZhxNifkQAAAABJRU5ErkJggg==) no-repeat;"></i>');
         var $searchForm = $('<form><input type="text" name="q" style="font-size:1.389em;line-height:23px;min-height:29px;margin:2%;width:96%;" /></form>');
         var $prevButton = $('<li style="width:33%!important">Назад</li>');
         var $nextButton = $('<li style="width:33%!important">Далее</li>');
@@ -158,6 +160,7 @@
                     }
                     else {
                         $modal.hide();
+                        $button.addClass('animate-icon');
                         $.ajax({
                             url: 'https://api.imgur.com/3/image',
                             type: 'POST',
@@ -170,6 +173,7 @@
                                 type: 'URL'
                             }
                         }).done(function (e) {
+                            $button.removeClass('animate-icon');
                             if (e.success === true) {
                                 result.imgurUrl = e.data.link;
                                 GM_setValue(key, JSON.stringify(result));
