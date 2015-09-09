@@ -1,10 +1,9 @@
 // ==UserScript==
 // @name         fungif
 // @namespace    http://sc2tv.ru
-// @version      0.1
+// @version      0.2
 // @description  sc2tv & funstream chat gifs paste
 // @author       Domitori
-// @require      https://github.com/carlo/jquery-base64/raw/master/jquery.base64.min.js
 // @include      http://sc2tv.ru/*
 // @match        http://sc2tv.ru/*
 // @include      http://funstream.tv/*
@@ -13,5 +12,7 @@
 // @downloadURL  https://raw.githubusercontent.com/Deumiteuli/fungif/master/fungif.user.js
 // @grant        GM_getValue
 // @grant        GM_setValue
+// @grant        GM_listValues
+// @grant        GM_deleteValue
 // @run-at       document-end
 // ==/UserScript==
