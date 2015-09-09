@@ -91,7 +91,7 @@
             $results.empty();
             var count = 16;
             var keys = GM_listValues();
-            for (var i in keys) {
+            for (var i = keys.length - 1; i >= 0; i--) {
                 var key = keys[i];
                 if (count < 0)
                     break;
