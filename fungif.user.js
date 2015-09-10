@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         fungif
 // @namespace    http://sc2tv.ru
-// @version      0.3
+// @version      0.4
 // @description  sc2tv & funstream chat gifs paste
 // @author       Domitori
 // @include      http://sc2tv.ru/*
@@ -119,6 +119,7 @@
 
         function searchSubmit(e) {
             queryData.q = $searchForm.find('input[name=q]').val();
+            queryData.start = 0;
             makeQuery();
 
             e.preventDefault();
@@ -139,6 +140,12 @@
         }
 
         function searchDone(e) {
+            if (e.responseDetails && e.responseDetails == 'out of range start') {
+                queryData.start = 0;
+                makeQuery();
+                return;
+            }
+            
             $results.empty();
             if (!e.responseData.results)
                 return;

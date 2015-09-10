@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         fungif
 // @namespace    http://sc2tv.ru
-// @version      0.3
+// @version      0.4
 // @description  sc2tv & funstream chat gifs paste
 // @author       Domitori
 // @include      http://sc2tv.ru/*
